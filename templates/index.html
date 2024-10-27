@@ -24,11 +24,28 @@
             <div class="card-body">
                <h3 class="card-title">Погода в {{ weather['name'] }}</h3>
                <p class="card-text">Температура: {{ weather['main']['temp'] }}°C</p>
+               <p class="card-text">Ощущается как: {{ weather['main']['feels_like'] }}°C</p>
                <p class="card-text">Погода: {{ weather['weather'][0]['description'] }}</p>
             </div>
          </div>
       {% endif %}
    </div>
+
+    <!-- случайная цитата -->
+       <div class="result text-center">
+      {% if weather %}
+         <div class="card mx-auto" style="width: 18rem;">
+            <div class="card-body">
+                <h4 class="card-title">Случайная цитата:</h4>
+               <h4 class="card-title">Автор цитаты {{ quote['author'] }}</h4>
+               <p class="card-text">{{ quote['content'] }}</p>
+            </div>
+         </div>
+      {% endif %}
+   </div>
+
+
+
 
    <div class="result text-center">
        {% if news %}

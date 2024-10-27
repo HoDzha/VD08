@@ -12,15 +12,18 @@ app = Flask(__name__)
 def index():
     weather = None
     news = None
+    quote = None
 #формируем условия для проверки метода. Форму мы пока не создавали, но нам из неё необходимо будет взять только город.
     if request.method == 'POST':
     #этот определенный город мы будем брать для запроса API
         city = request.form['city']
         #получаем погоду
         news = get_news()
+        quote = get_quote()
         weather = get_weather(city)
 
-    return render_template("index.html", weather=weather, news=news)
+
+    return render_template("index.html", weather=weather, news=news, quote=quote)
 
 
 def get_weather(city):
@@ -43,6 +46,11 @@ def get_news():
     url = f"https://newsapi.org/v2/top-headlines?country=us&apiKey={api_key}"
     response = requests.get(url)
     return response.json().get('articles', [])
+def get_quote():
+    url = "http://api.quotable.io/random"
+    response = requests.get(url)
+    return response.json()
+
 
 if __name__ == '__main__':
     app.run(debug=True)
